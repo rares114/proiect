@@ -26,11 +26,6 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Please fill the password field");
   }
 
-  if (!phone) {
-    res.status(400);
-    throw new Error("Please fill the phone field");
-  }
-
   if (typeof isshop === "undefined") {
     res.status(400);
     throw new Error("Please fill the isshop field");
@@ -53,8 +48,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Insert user data into the database
     const [insertResult] = await executeQuery(
-      "INSERT INTO users (name, email, password, phone, isshop) VALUES (?, ?, ?, ?, ?)",
-      [name, email, hashedPassword, phone, isshop]
+      "INSERT INTO users (name, email, password, isshop) VALUES (?, ?, ?, ?)",
+      [name, email, hashedPassword, isshop]
     );
 
     if (insertResult.affectedRows === 1) {

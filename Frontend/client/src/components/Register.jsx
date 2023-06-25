@@ -4,61 +4,21 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { server_url } from "../config";
+import { Button, Checkbox, Form, Input } from "antd";
 
 const Register = ({ onRegisterClose }) => {
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [isshop, setIsShop] = useState(false);
   const navigate = useNavigate();
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
-  };
-
-  const handleShopCheck = (e) => {
-    setIsShop(e.target.checked);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword) {
+  const onFinish = async (values) => {
+    if (values.password !== values.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
 
-    if (isshop === true) toast.success("DA");
-    else toast.error("NU");
-
-    const payload = {
-      name,
-      email,
-      password,
-      phone,
-      isshop,
-    };
+    values.isshop = values.isshop === true ? 1 : 0;
 
     try {
-      const response = await axios.post(`${server_url}/users`, payload);
+      const response = await axios.post(`${server_url}/users`, values);
 
       if (response.status === 201) {
         toast.success("Account created successfully");
@@ -73,77 +33,43 @@ const Register = ({ onRegisterClose }) => {
   };
 
   return (
-    <div className="register-container">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={handleNameChange}
-            className="register-input"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            className="register-input"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            className="register-input"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="confirm-password">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            className={
-              password !== confirmPassword
-                ? "register-input mismatch"
-                : "register-input"
-            }
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone">Phone:</label>
-          <input
-            type="text"
-            id="phone"
-            value={phone}
-            onChange={handlePhoneChange}
-            className="register-input"
-          />
-        </div>
-        <div>
-          <label>Are you a Shop?</label>
-          <input type="checkbox" checked={isshop} onChange={handleShopCheck} />
-        </div>
-        <div className="register-button-container">
-          <button type="submit">Register</button>
-        </div>
+    <div className="login-container">
+      <Form
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        onFinish={onFinish}
+      >
+        <Form.Item label="Name" name="name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Email" name="email">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Password" name="password">
+          <Input.Password />
+        </Form.Item>
+        <Form.Item label="Confirm password" name="confirmPassword">
+          <Input.Password />
+        </Form.Item>
+        <Form.Item
+          name="isshop"
+          valuePropName="checked"
+          wrapperCol={{ offset: 8, span: 16 }}
+        >
+          <Checkbox>Is shop</Checkbox>
+        </Form.Item>
         <div className="login-link-container">
           <p>
             Already have an account? <Link to="/login">Login</Link>
           </p>
         </div>
-      </form>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
