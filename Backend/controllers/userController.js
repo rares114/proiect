@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
-const User = require("../models/userModel")
+const User = require("../models/userModel");
 const mysql = require("mysql2/promise");
-
+const executeQuery = require("../config/db");
 
 // @desc    Register new user
 // @route   POST /users
@@ -15,37 +15,32 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please fill the name field");
   }
-  
+
   if (!email) {
     res.status(400);
     throw new Error("Please fill the email field");
   }
-  
+
   if (!password) {
     res.status(400);
     throw new Error("Please fill the password field");
   }
-  
+
   if (!phone) {
     res.status(400);
     throw new Error("Please fill the phone field");
   }
-  
-  if (typeof isshop === 'undefined') {
+
+  if (typeof isshop === "undefined") {
     res.status(400);
     throw new Error("Please fill the isshop field");
   }
-  
-  const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'testing'
-  });
 
   try {
     // Check if user exists
-    const [rows] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
+    const [rows] = await executeQuery("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
 
     if (rows.length > 0) {
       res.status(400);
@@ -57,7 +52,10 @@ const registerUser = asyncHandler(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Insert user data into the database
-    const [insertResult] = await connection.execute('INSERT INTO users (name, email, password, phone, isshop) VALUES (?, ?, ?, ?, ?)', [name, email, hashedPassword, phone, isshop]);
+    const [insertResult] = await executeQuery(
+      "INSERT INTO users (name, email, password, phone, isshop) VALUES (?, ?, ?, ?, ?)",
+      [name, email, hashedPassword, phone, isshop]
+    );
 
     if (insertResult.affectedRows === 1) {
       const user = {
@@ -75,7 +73,7 @@ const registerUser = asyncHandler(async (req, res) => {
       throw new Error("Invalid user data");
     }
   } catch (error) {
-    console.error('Error registering user:', error);
+    console.error("Error registering user:", error);
     throw error;
   } finally {
     // Close the database connection
@@ -88,18 +86,11 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-
-  // Create a database connection and execute the query
-  const connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "testing",
-  });
-
   try {
     // Check if user exists
-    const [rows] = await connection.query("SELECT * FROM users WHERE email = ?", [email]);
+    const [rows] = await executeQuery("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
 
     if (rows.length === 0) {
       res.status(400);
@@ -110,22 +101,21 @@ const loginUser = asyncHandler(async (req, res) => {
     // Compare passwords
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    const response = {
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user.id),
-      isshop: user.isshop // Include the isShop value if available
-    };
-
     if (!passwordMatch) {
       res.status(400);
       throw new Error("Invalid credentials");
     } else {
       // Authentication successful
+      const response = {
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        token: generateToken(user.id),
+        isshop: user.isshop, // Include the isShop value if available
+      };
+
       res.status(200).json(response);
     }
-
   } catch (error) {
     console.error("Error logging in:", error);
     throw error;
@@ -147,7 +137,6 @@ const getMe = asyncHandler(async (req, res) => {
     email,
   });
 });
-
 
 // Generate JWT
 const generateToken = (id) => {

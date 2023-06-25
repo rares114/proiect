@@ -1,12 +1,12 @@
-// const express = require("express");
-// const router = express.Router();
-// const {
-//     registerShop,
-//     loginShop,
-//   } = require("../controllers/userController");
-// const { protect } = require("../middleware/authMiddleware");
+const express = require("express");
+const router = express.Router();
+const {
+  updateShopInfo,
+  addOrUpdateProduct,
+} = require("../controllers/shopController");
+const { protect } = require("../middleware/authMiddleware");
 
-// router.post("/", registerShop);
-// router.post("/login", loginShop);
+router.post("/me", protect, updateShopInfo);
+router.post("/product", protect, addOrUpdateProduct);
 
-// module.exports = router;
+module.exports = router;

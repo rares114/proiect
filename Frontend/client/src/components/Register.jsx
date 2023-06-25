@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, Link, } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { server_url } from "../config";
 
 const Register = ({ onRegisterClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,10 +46,8 @@ const Register = ({ onRegisterClose }) => {
       return;
     }
 
-    if(isshop === true)
-    toast.success("DA");
-    else
-    toast.error("NU");
+    if (isshop === true) toast.success("DA");
+    else toast.error("NU");
 
     const payload = {
       name,
@@ -59,7 +58,7 @@ const Register = ({ onRegisterClose }) => {
     };
 
     try {
-      const response = await axios.post("/users", payload);
+      const response = await axios.post(`${server_url}/users`, payload);
 
       if (response.status === 201) {
         toast.success("Account created successfully");
@@ -141,10 +140,7 @@ const Register = ({ onRegisterClose }) => {
         </div>
         <div className="login-link-container">
           <p>
-            Already have an account?{" "}
-            <Link to="/login">
-              Login
-            </Link>
+            Already have an account? <Link to="/login">Login</Link>
           </p>
         </div>
       </form>

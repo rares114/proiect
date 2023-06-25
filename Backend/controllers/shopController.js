@@ -1,43 +1,51 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
-const mysql = require("mysql2/promise");
-const Shop = require("../models/shopModel");
+const executeQuery = require("../config/db");
 
 // @desc    Register a shop
 // @route   POST /shops
 // @access  Protected (assuming only authenticated users can register a shop)
 
-const registerShop = asyncHandler(async (req, res) => {
-  const { name, email, address, phone, description } = req.body;
-
-  // Validate the required fields
-  if (!name || !email || !address || !phone ) {
-    res.status(400);
-    throw new Error("Please fill in all the required fields");
-  }
-
+const updateShopInfo = asyncHandler(async (req, res) => {
   try {
-    // Check if shop with the given email already exists
-    const existingShop = await Shop.findOne({ email });
-
-    if (existingShop) {
+    if (req.user.isshop !== 1) {
       res.status(400);
-      throw new Error("Shop with this email already exists");
+      throw "User is not a shop";
     }
 
-    // Create a new shop object
-    const shop = new Shop({
-      name,
-      email,
-      address,
-      phone,
-      description,
-    });
+    const userID = req.user.id;
+    const { shopName, email, address, phone, description } = req.body;
 
-    // Save the shop to the database
-    const createdShop = await shop.save();
+    await executeQuery(`INSERT INTO shops (id, name, address, phone) VALUES(${userID}, "${shopName}", "${address}", "${phone}") ON DUPLICATE KEY UPDATE    
+    name="${shopName}", address="${address}", phone="${phone}"`);
 
-    res.status(201).json(createdShop);
+    const response = {
+      shopName: shopName,
+      address: address,
+      phone: phone,
+    };
+    res.status(200).json(response);
+  } catch (error) {
+    console.error("Error registering shop:", error);
+    throw error;
+  }
+});
+
+const addOrUpdateProduct = asyncHandler(async (req, res) => {
+  try {
+    if (req.user.isshop !== 1) {
+      res.status(400);
+      throw "User is not a shop";
+    }
+
+    const userID = req.user.id;
+    const { name, quantity, um } = req.body;
+
+    await executeQuery(`INSERT INTO products (shop, name, quantity, um) VALUES(${userID}, "${name}", ${quantity}, "${um}") ON DUPLICATE KEY UPDATE    
+    name="${name}", quantity=${quantity}, um="${um}"`);
+
+    const response = {};
+    res.status(200).json(response);
   } catch (error) {
     console.error("Error registering shop:", error);
     throw error;
@@ -45,5 +53,6 @@ const registerShop = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  registerShop,
+  updateShopInfo,
+  addOrUpdateProduct,
 };

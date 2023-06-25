@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const executeQuery = require("../config/db");
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -18,7 +19,17 @@ const protect = asyncHandler(async (req, res, next) => {
 
       // Get user from the token
       // -password ignores the password and retrieves all other fields
-      req.user = await User.findById(decoded.id).select("-password");
+      //req.user = await User.findById(decoded.id).select("-password");
+
+      const [rows] = await executeQuery("SELECT * FROM users WHERE id = ?", [
+        decoded.id,
+      ]);
+
+      if (rows.length === 0) {
+        throw new Error("Invalid token");
+      }
+
+      req.user = rows[0];
 
       next();
     } catch (error) {

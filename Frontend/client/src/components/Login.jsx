@@ -29,10 +29,12 @@ const Login = () => {
       const response = await axios.post("/users/login", payload);
 
       if (response.status === 200) {
+        console.log(response.data);
         toast.success("Login successful");
         const isShop = response.data.isshop;
         const token = response.data.token;
-          
+        localStorage.setItem("token", token);
+
         if (isShop === 1) {
           navigate("/shop");
         } else {
