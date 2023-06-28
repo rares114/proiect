@@ -1,9 +1,8 @@
 body {
-  background-image: url("./images/BackgroundWEB.png");
+  background-image: url("./images/BackgroundWEB.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   place-items: center;
-  height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -63,24 +62,52 @@ h2 {
   text-align: center;
 }
 
-
 .login-container {
   text-align: center;
   position: absolute;
-  left: 42%;
-  top: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+}
+
+.login-link-container {
+  text-align: center;
+}
+
+.login-container form {
+  width: 100%;
+  padding: 16px;
+}
+
 .register-container {
   text-align: center;
   position: absolute;
-  left: 40%;
-  top: 25%;
-  padding: 20px;
+  width: 400px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
   background-color: #f4f4f4;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -128,17 +155,33 @@ h2 {
   margin: 0px;
 }
 
-.primary-navbar button {
-  background-color: #8bf144;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  margin-left: auto;
-  align-self: flex-start; /* Align buttons to the top */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 50px;
+.green-link {
+  color: green !important;
+}
+
+.green-link:hover {
+  color: limegreen !important;
+}
+
+
+.nav-btn {
+background-color: #4caf50;
+margin:5px;
+}
+
+.nav-btn:hover {
+  background-color: white !important;
+  border-color: green !important;
+  color: green !important;
+}
+
+.infomele-containter {
+  
+  position: absolute;
+  width: 400px;
+  left: 40%;
+  transform: translate(-50%);
+  padding: 40px;
 }
 
 .primary-navbar button:hover {

@@ -14,11 +14,6 @@ const tabs = [
     label: `Produsele mele`,
     children: <TabProduseleMele />,
   },
-  {
-    key: "3",
-    label: `Tab 3`,
-    children: `Content of Tab Pane 3`,
-  },
 ];
 
 const ShopPage = () => {

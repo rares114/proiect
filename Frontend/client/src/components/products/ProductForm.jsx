@@ -17,9 +17,9 @@ const ProductForm = () => {
       });
 
       if (response.status === 200) {
-        toast.success("Produs definit");
+        toast.success("Produs adăugat");
       } else {
-        toast.error("Nu s-a putut defini produsul");
+        toast.error("Nu s-a putut adăuga produsul");
       }
     } catch (error) {
       toast.error("A aparut o problema");
@@ -37,7 +37,6 @@ const ProductForm = () => {
       </Form.Item>
       <Form.Item label="UM" name="um">
         <Select
-          placeholder="Select a option and change input text above"
           allowClear
         >
           <Option value="kg">KG</Option>
@@ -45,10 +44,13 @@ const ProductForm = () => {
           <Option value="buc">Buc</Option>
         </Select>
       </Form.Item>
+      <Form.Item label="Pret" name="price">
+        <InputNumber />
+      </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Actualizeaza
-        </Button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Adaugă
+          </Button>
       </Form.Item>
     </Form>
   );

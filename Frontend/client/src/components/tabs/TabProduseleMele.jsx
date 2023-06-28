@@ -20,7 +20,9 @@ const TabProduseleMele = () => {
 
   return (
     <div>
-      <Button onClick={showDrawer}>Adauga produs</Button>
+      <Button type="primary" htmlType="submit" className='nav-btn' onClick={showDrawer}>
+            Adaugă un produs
+          </Button>
       <ProductsTable />
       <Drawer
         title="Definire produs"

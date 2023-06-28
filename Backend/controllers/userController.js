@@ -133,6 +133,18 @@ const getMe = asyncHandler(async (req, res) => {
   });
 });
 
+const fetchAllProducts = asyncHandler(async (req, res) => {
+  try {
+    const query = `SELECT * FROM products`;
+
+    const products = await executeQuery(query);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+});
+
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
@@ -142,4 +154,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  fetchAllProducts,
 };

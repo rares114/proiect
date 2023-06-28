@@ -14,19 +14,22 @@ const updateShopInfo = asyncHandler(async (req, res) => {
     }
 
     const userID = req.user.id;
-    const { shopName, email, address, phone, description } = req.body;
+    const { shopName, email, address, phone, schedule, description } = req.body;
 
-    await executeQuery(`INSERT INTO shops (id, name, address, phone) VALUES(${userID}, "${shopName}", "${address}", "${phone}") ON DUPLICATE KEY UPDATE    
-    name="${shopName}", address="${address}", phone="${phone}"`);
+    await executeQuery(`INSERT INTO shops (id, name, email, address, phone, schedule, description) VALUES(${userID}, "${shopName}", "${email}", "${address}", "${phone}", "${schedule}", "${description}") ON DUPLICATE KEY UPDATE    
+    name="${shopName}", email="${email}", address="${address}", phone="${phone}", schedule="${schedule}", description="${description}"`);
 
     const response = {
       shopName: shopName,
+      email: email,
       address: address,
       phone: phone,
+      schedule: schedule,
+      description: description,
     };
     res.status(200).json(response);
   } catch (error) {
-    console.error("Error registering shop:", error);
+    console.error("Error updating shop:", error);
     throw error;
   }
 });
@@ -39,10 +42,10 @@ const addOrUpdateProduct = asyncHandler(async (req, res) => {
     }
 
     const userID = req.user.id;
-    const { name, quantity, um } = req.body;
+    const { name, quantity, um, price } = req.body;
 
-    await executeQuery(`INSERT INTO products (shop, name, quantity, um) VALUES(${userID}, "${name}", ${quantity}, "${um}") ON DUPLICATE KEY UPDATE    
-    name="${name}", quantity=${quantity}, um="${um}"`);
+    await executeQuery(`INSERT INTO products (shop, name, quantity, um, price) VALUES(${userID}, "${name}", "${quantity}", "${um}", "${price}") ON DUPLICATE KEY UPDATE    
+    name="${name}", quantity=${quantity}, um="${um}", price="${price}"`);
 
     const response = {};
     res.status(200).json(response);
@@ -52,7 +55,21 @@ const addOrUpdateProduct = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchShopProducts = asyncHandler(async (req, res) => {
+  try {
+    const userID = req.user.id;
+    const query = `SELECT * FROM products WHERE shop = ${userID}`;
+
+    const products = await executeQuery(query);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+});
+
 module.exports = {
   updateShopInfo,
   addOrUpdateProduct,
+  fetchShopProducts,
 };

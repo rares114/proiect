@@ -1,26 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {Button} from 'antd';
 
 const PrimaryNavbar = () => {
   return (
     <div className="primary-navbar">
       <Link to="/">
-        <button>Home</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Acasă
+          </Button>
       </Link>
       <Link to="/login">
-        <button>Login</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Logare
+          </Button>
       </Link>
       <Link to="/register">
-        <button className='regBtn'>Register</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Register
+          </Button>
       </Link>
       <Link to="/faq">
-        <button>FAQ</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            FAQ
+          </Button>
       </Link>
       <Link to="/about">
-        <button>About Us</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Despre noi
+          </Button>
       </Link>
       <Link to="/contact">
-        <button>Contact Us</button>
+      <Button type="primary" htmlType="submit" className='nav-btn'>
+            Contact
+          </Button>
       </Link>
     </div>
   );
