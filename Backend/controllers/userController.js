@@ -32,7 +32,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   try {
-    // Check if user exists
     const [rows] = await executeQuery("SELECT * FROM users WHERE email = ?", [
       email,
     ]);
@@ -42,11 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
       throw new Error("Email is already in use");
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Insert user data into the database
     const [insertResult] = await executeQuery(
       "INSERT INTO users (name, email, password, isshop) VALUES (?, ?, ?, ?)",
       [name, email, hashedPassword, isshop]
@@ -71,7 +68,6 @@ const registerUser = asyncHandler(async (req, res) => {
     console.error("Error registering user:", error);
     throw error;
   } finally {
-    // Close the database connection
     connection.end();
   }
 });
@@ -82,7 +78,6 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Check if user exists
     const [rows] = await executeQuery("SELECT * FROM users WHERE email = ?", [
       email,
     ]);
@@ -93,20 +88,18 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     const user = rows[0];
-    // Compare passwords
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       res.status(400);
       throw new Error("Invalid credentials");
     } else {
-      // Authentication successful
       const response = {
         _id: user.id,
         name: user.name,
         email: user.email,
         token: generateToken(user.id),
-        isshop: user.isshop, // Include the isShop value if available
+        isshop: user.isshop,
       };
 
       res.status(200).json(response);
@@ -115,7 +108,6 @@ const loginUser = asyncHandler(async (req, res) => {
     console.error("Error logging in:", error);
     throw error;
   } finally {
-    // Close the database connection
     connection.end();
   }
 });

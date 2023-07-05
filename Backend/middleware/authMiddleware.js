@@ -11,15 +11,9 @@ const protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      // Get token from header
       token = req.headers.authorization.split(" ")[1];
 
-      // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      // Get user from the token
-      // -password ignores the password and retrieves all other fields
-      //req.user = await User.findById(decoded.id).select("-password");
 
       const [rows] = await executeQuery("SELECT * FROM users WHERE id = ?", [
         decoded.id,

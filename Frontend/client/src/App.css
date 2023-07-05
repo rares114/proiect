@@ -179,8 +179,8 @@ margin:5px;
   
   position: absolute;
   width: 400px;
-  left: 40%;
-  transform: translate(-50%);
+  left: 30%;
+  transform: translate(-50%, 20%);
   padding: 40px;
 }
 
