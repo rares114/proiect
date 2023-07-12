@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { server_url } from "../../config";
 import { Input, Button } from "antd";
-import Map from "../Map";
-import Geocode from "react-geocode";
 
 const TabInformatiileMele = () => {
   const [markerPosition, setMarkerPosition] = useState([51.505, -0.09]);
@@ -15,7 +13,6 @@ const TabInformatiileMele = () => {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [schedule, setSchedule] = useState("");
-  const mapRef = useRef(null);
 
   const { TextArea } = Input;
 
@@ -63,16 +60,6 @@ const TabInformatiileMele = () => {
       });
   
       if (response.status === 200) {
-        Geocode.fromAddress(address)
-          .then((response) => {
-            const { lat, lng } = response.results[0].geometry.location;
-            setMarkerPosition([lat, lng]);
-            mapRef.current.setView([lat, lng], 13);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-  
         toast.success("Informatiile au fost actualizate");
       } else {
         toast.error("Nu s-au putu actualiza informatiile");
@@ -177,7 +164,6 @@ const TabInformatiileMele = () => {
           </div>
         </form>
       </div>
-      <Map markerPosition={markerPosition} />
     </div>
   );
 };

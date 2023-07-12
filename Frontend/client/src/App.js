@@ -8,14 +8,15 @@ import RegularUserPage from './components/RegularUserPage';
 import ShopPage from './components/ShopPage';
 import './App.css';
 import AboutShop from './components/AboutShop';
-import Home from './components/Home'
+import Home from './components/Home';
+import BackgroundComponent from './components/BackgroundComponent';
 
 const App = () => {
   return (
     <div className="app">
+      <BackgroundComponent />
       <ToastContainer />
       <Router>
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

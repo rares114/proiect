@@ -1,27 +1,31 @@
 import React from "react";
 import myImage from "../images/StoreLOGO.png";
 import myImage2 from "../images/storePNG.png";
-import PrimaryNavbar from './PrimaryNavbar';
+import PrimaryNavbar from "./PrimaryNavbar";
+import Map from "./Map";
 
-const Home = () => (
-  <>
-    <PrimaryNavbar />
-    <img src={myImage} className="logo" />
-    <img src={myImage2} className="grocery" />
-    <h1>Welcome to an enchanting world, full of local treasures!</h1>
-    <div className="divH2">
-      <h2>
-        Explore non-stop shops, grocery stores, bakeries, and florists, where
-        you will find unique products and personalized services. Enjoy the
-        simple pleasures of shopping and be inspired by the beauty and freshness
-        offered by small businesses in your neighborhood. Be part of a vibrant
-        community and support these local enterprises, bringing a touch of magic
-        and color into your everyday life. Discover these treasures and let
-        yourself be carried away in an experience full of surprises and
-        inspiration!
-      </h2>
+const Home = () => {
+  const defaultPosition = [51.505, -0.09];
+  const defaultZoom = 13; 
+
+  return (
+    <div style={{ overflowY: 'scroll', height: '100vh' }}>
+      <PrimaryNavbar />
+      <div className="logo-container">
+        <img src={myImage} className="logo" alt="Logo" />
+      </div>
+      <h1>Bine ai venit în lumea micilor comori locale!</h1>
+      <div className="divH2">
+        <h2>
+        Explorează brutăriile și florăriile, magazinele alimentare și non-stop, unde vei găsi produse unice și servicii personalizate. Bucură-te de plăcerile simple ale cumpărăturilor și lasă-te inspirat de frumusețea și prospețimea oferite de afacerile mici din vecinătatea ta. Fă parte dintr-o comunitate vibrantă și susține aceste întreprinderi locale, aducând o notă de magie și culoare în viața ta de zi cu zi. Descoperă aceste comori și lasă-te purtat într-o experiență plină de surprize și inspirație!
+        </h2>
+      </div>
+      <img src={myImage2} className="grocery" alt="Grocery" />
+      <div className="containerHarta">
+        <Map center={defaultPosition} zoom={defaultZoom} />
+      </div>
     </div>
-  </>
-);
+  );
+};
 
 export default Home;

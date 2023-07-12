@@ -1,7 +1,7 @@
 body {
-  background-image: url("./images/BackgroundWEB.jpg");
+  /*background-image: url("./images/BackgroundWEB.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
   place-items: center;
   margin: 0;
   padding: 0;
@@ -9,58 +9,64 @@ body {
 
 h1 {
   text-align: center;
-  position: absolute;
-  top: 20%;
+  position: relative;
+  top: 8%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 500;
 }
 
 h2 {
-  position: absolute;
+  position: relative;
   height: 200px;
   padding: 20px;
   text-align: justify;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 100;
 }
 
 .divH2 {
-  position: absolute;
+  position: relative;
   width: 40%;
   text-indent: 50px;
-  top: 33%;
+  top: 13%;
   left: 8%;
+}
+
+.containerHarta{
+  position: relative;
+  top: -105%;
+  left: -5%;
 }
 
 .grocery {
   width: 900px;
   height: 900px;
-  position: absolute;
+  position: relative;
   display: flex;
   left: 50%;
-  top: 5%;
+  top: -32%;
 }
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: -42px;
+}
+
 
 .logo {
   width: 150px;
   height: 150px;
-  background-image: url('./images/StoreLOGO.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  align-items: center;
   font-size: 24px;
   font-weight: bold;
   color: white;
   text-align: center;
 }
+
+
 
 .login-container {
   text-align: center;
@@ -150,29 +156,30 @@ h2 {
 
 .primary-navbar {
   display: flex;
-  justify-content: flex-end;
+  width: fit-content;
+  height: fit-content;
   align-items: center;
-  margin: 0px;
+  margin-left: auto;
 }
 
 .green-link {
-  color: green !important;
+  color: #7ceaa4 !important;
 }
 
 .green-link:hover {
-  color: limegreen !important;
+  color: #7ceaa4 !important;
 }
 
 
 .nav-btn {
-background-color: #4caf50;
+background-color: #7ceaa4;
 margin:5px;
 }
 
 .nav-btn:hover {
   background-color: white !important;
-  border-color: green !important;
-  color: green !important;
+  border-color: #7ceaa4 !important;
+  color: #3b3d54 !important;
 }
 
 .infomele-containter {
@@ -184,8 +191,13 @@ margin:5px;
   padding: 40px;
 }
 
+.primary-navbar button {
+  color: #3b3d54;
+}
+
 .primary-navbar button:hover {
   background-color: white;
+  color: #3b3d54;
 }
 
 .login-input {
