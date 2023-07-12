@@ -20,7 +20,15 @@ const ShopPage = () => {
   const onChange = (key) => {
     console.log(key);
   };
-  return <Tabs defaultActiveKey="1" items={tabs} onChange={onChange} />;
+
+  return (
+    <Tabs
+      defaultActiveKey="1"
+      items={tabs}
+      onChange={onChange}
+      className="tabz"
+    />
+  );
 };
 
 export default ShopPage;

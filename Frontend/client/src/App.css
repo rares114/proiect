@@ -182,17 +182,25 @@ margin:5px;
   color: #3b3d54 !important;
 }
 
+.tabelProd{
+  width: 80%;
+  position: relative;
+  left: 10%;
+}
+
 .infomele-containter {
-  
-  position: absolute;
+  position: relative;
   width: 400px;
-  left: 30%;
-  transform: translate(-50%, 20%);
+  left: 15%;
   padding: 40px;
 }
 
 .primary-navbar button {
   color: #3b3d54;
+}
+
+.tabz {
+  color: white;
 }
 
 .primary-navbar button:hover {
