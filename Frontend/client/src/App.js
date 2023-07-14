@@ -10,6 +10,9 @@ import './App.css';
 import AboutShop from './components/AboutShop';
 import Home from './components/Home';
 import BackgroundComponent from './components/BackgroundComponent';
+import Faq from './components/Faq';
+import DespreNoi from './components/DespreNoi';
+import Contact from './components/Contact';
 
 const App = () => {
   return (
@@ -24,6 +27,9 @@ const App = () => {
           <Route path="/regular-user" element={<RegularUserPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/shop/about-shop" element={<AboutShop />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/about" element={<DespreNoi />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </div>

@@ -1,7 +1,4 @@
 body {
-  /*background-image: url("./images/BackgroundWEB.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;*/
   place-items: center;
   margin: 0;
   padding: 0;
@@ -32,7 +29,7 @@ h2 {
   left: 8%;
 }
 
-.containerHarta{
+.containerHarta {
   position: relative;
   top: -105%;
   left: -5%;
@@ -53,7 +50,6 @@ h2 {
   margin-top: -42px;
 }
 
-
 .logo {
   width: 150px;
   height: 150px;
@@ -65,8 +61,6 @@ h2 {
   color: white;
   text-align: center;
 }
-
-
 
 .login-container {
   text-align: center;
@@ -170,10 +164,9 @@ h2 {
   color: #7ceaa4 !important;
 }
 
-
 .nav-btn {
-background-color: #7ceaa4;
-margin:5px;
+  background-color: #7ceaa4;
+  margin: 5px;
 }
 
 .nav-btn:hover {
@@ -182,13 +175,36 @@ margin:5px;
   color: #3b3d54 !important;
 }
 
-.tabelProd{
+.logout {
+  position: absolute;
+  background-color: #7ceaa4;
+  margin: 5px;
+  left: 90%;
+  top: 90%;
+}
+
+.logout:hover {
+  background-color: white !important;
+  border-color: #7ceaa4 !important;
+  color: #3b3d54 !important;
+}
+
+.tabelProd {
+  width: 80%;
+  position: relative;
+  left: 10%;
+}
+
+.tabelTotal {
+  top: 50px;
   width: 80%;
   position: relative;
   left: 10%;
 }
 
 .infomele-containter {
+  border-radius: 10px;
+  background: white;
   position: relative;
   width: 400px;
   left: 15%;

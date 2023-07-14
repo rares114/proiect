@@ -17,7 +17,7 @@ const PrimaryNavbar = () => {
       </Link>
       <Link to="/register">
       <Button type="primary" htmlType="submit" className='nav-btn'>
-            Register
+          Înregistrare
           </Button>
       </Link>
       <Link to="/faq">

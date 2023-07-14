@@ -2,9 +2,14 @@ import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { server_url } from "../config";
+import {Button} from 'antd';
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProductsTable = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchProducts();
@@ -46,7 +51,24 @@ const ProductsTable = () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.success("Te-ai fost deconectat");
+    navigate("/");
+  };
+
+  return (
+    <div className="container">
+      <Table columns={columns} dataSource={data} className="tabelTotal" />
+      <div className="buttonWrapper">
+        <Button type="primary" className="logout" onClick={handleLogout}>
+          Deconectare
+        </Button>
+      </div>
+    </div>
+  );
+  
+
 };
 
 export default ProductsTable;

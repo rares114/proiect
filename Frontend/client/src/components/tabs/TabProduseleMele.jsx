@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { server_url } from "../../config";
 import { Button, Drawer } from "antd";
 import ProductsTable from "../products/ProductsTable";
 import ProductForm from "../products/ProductForm";

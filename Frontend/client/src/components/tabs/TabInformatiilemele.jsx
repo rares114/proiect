@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { server_url } from "../../config";
 import { Button, Form, Input, InputNumber, Select } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 const TabInformatiileMele = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     try {
@@ -28,14 +30,28 @@ const TabInformatiileMele = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.success("Te-ai fost deconectat");
+    navigate("/");
+  };
+
   return (
     <div>
       <div className="infomele-containter">
         <Form form={form} onFinish={handleSubmit} layout="vertical">
-          <Form.Item name="shopName" label="Numele magazinului">
+          <Form.Item
+            name="shopName"
+            label="Numele magazinului"
+            className="formm"
+          >
             <Input />
           </Form.Item>
-          <Form.Item name="email" label="Email de contact">
+          <Form.Item
+            name="email"
+            label="Email de contact"
+            style={{ color: "red" }}
+          >
             <Input />
           </Form.Item>
           <Form.Item name="address" label="Adresa">
@@ -57,6 +73,9 @@ const TabInformatiileMele = () => {
           </Form.Item>
         </Form>
       </div>
+      <Button type="primary" className="logout" onClick={handleLogout}>
+        Deconectare
+      </Button>
     </div>
   );
 };

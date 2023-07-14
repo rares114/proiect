@@ -9,15 +9,14 @@ const GeocoderControl = ({ onAddressSelect }) => {
 
   useEffect(() => {
     const geocoderControl = L.Control.geocoder({
-      defaultMarkGeocode: false, // Disable default centering behavior
+      defaultMarkGeocode: false,
     })
       .on("markgeocode", (event) => {
         const { center } = event.geocode;
-        onAddressSelect(center); // Pass the selected address to the callback prop
+        onAddressSelect(center);
       })
       .addTo(map);
 
-    // Automatically locate the user's position
     map.locate({ setView: true, maxZoom: 16 });
 
     return () => {
