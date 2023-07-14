@@ -1,15 +1,13 @@
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { server_url } from "../config";
-import {Button} from 'antd';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ProductsTable = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     fetchProducts();
@@ -22,11 +20,25 @@ const ProductsTable = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(response.data[0])
+      console.log(response.data[0]);
       setData(response.data[0]);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.success("Te-ai fost deconectat");
+    navigate("/");
+  };
+
+  const handleProductClick = (record) => {
+    navigate("/produsul"); // Navigate to "/produsul" page
+  };
+
+  const handleShopClick = (record) => {
+    navigate("/magazinul"); // Navigate to "/magazinul" page
   };
 
   const columns = [
@@ -34,6 +46,14 @@ const ProductsTable = () => {
       title: "Denumire",
       dataIndex: "name",
       key: "name",
+      render: (text, record) => (
+        <span
+          className="clickable-text"
+          onClick={() => handleProductClick(record)}
+        >
+          {text}
+        </span>
+      ),
     },
     {
       title: "Cantitate",
@@ -48,18 +68,28 @@ const ProductsTable = () => {
       title: "Magazin",
       dataIndex: "shop",
       key: "shop",
+      render: (text, record) => (
+        <span
+          className="clickable-text"
+          onClick={() => handleShopClick(record)}
+        >
+          {text}
+        </span>
+      ),
     },
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    toast.success("Te-ai fost deconectat");
-    navigate("/");
-  };
-
   return (
     <div className="container">
-      <Table columns={columns} dataSource={data} className="tabelTotal" />
+      <Table
+        columns={columns}
+        dataSource={data}
+        className="tabelTotal"
+        rowClassName="clickable-row"
+        onRow={(record) => ({
+          onClick: () => {}, // Empty click handler to prevent selection
+        })}
+      />
       <div className="buttonWrapper">
         <Button type="primary" className="logout" onClick={handleLogout}>
           Deconectare
@@ -67,8 +97,6 @@ const ProductsTable = () => {
       </div>
     </div>
   );
-  
-
 };
 
 export default ProductsTable;

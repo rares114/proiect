@@ -3,10 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { server_url } from "../../config";
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
-
-const { Option } = Select;
 
 const TabInformatiileMele = () => {
   const [form] = Form.useForm();

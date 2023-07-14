@@ -3,7 +3,7 @@ import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "bootstrap/dist/css/bootstrap.css";
-import GeocoderControl from "./Geocoder";
+import GeocoderControl from "./GeocoderControl";
 import markerIcon from "../images/marker.png";
 
 const Map = ({ center, zoom }) => {
