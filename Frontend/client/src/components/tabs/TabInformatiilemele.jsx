@@ -71,7 +71,7 @@ const TabInformatiileMele = () => {
           </Form.Item>
         </Form>
       </div>
-      <Button type="primary" className="logout" onClick={handleLogout}>
+      <Button type="primary" className="logout2" onClick={handleLogout}>
         Deconectare
       </Button>
     </div>

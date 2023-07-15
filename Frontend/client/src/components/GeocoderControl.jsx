@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
@@ -8,20 +8,17 @@ import markerIcon from "../images/marker.png";
 const GeocoderControl = ({ onAddressSelect }) => {
   const map = useMap();
   const [currentLocation, setCurrentLocation] = useState(null);
+  const markerRef = useRef(null);
 
   useEffect(() => {
-    L.Icon.Default.prototype.options.iconRetinaUrl = ""; // Remove default icon
+    L.Icon.Default.prototype.options.iconRetinaUrl = "";
 
-    const geocoderControl = L.Control.geocoder({
-      defaultMarkGeocode: false,
-    })
+    const geocoderControl = L.Control.geocoder({})
       .on("markgeocode", (event) => {
         const { center } = event.geocode;
         onAddressSelect(center);
       })
       .addTo(map);
-
-    map.locate({ setView: true, maxZoom: 16 });
 
     map.on("locationfound", (event) => {
       const { lat, lng } = event.latlng;
@@ -34,10 +31,18 @@ const GeocoderControl = ({ onAddressSelect }) => {
   }, [map, onAddressSelect]);
 
   useEffect(() => {
+    if (markerRef.current) {
+      map.removeLayer(markerRef.current);
+    }
+
     if (currentLocation) {
-      L.marker(currentLocation, { icon: customIcon }).addTo(map);
+      markerRef.current = L.marker(currentLocation, { icon: customIcon }).addTo(map);
     }
   }, [currentLocation, map]);
+
+  useEffect(() => {
+    map.locate({ setView: true, maxZoom: 16 });
+  }, [map]);
 
   const customIcon = L.icon({
     iconUrl: markerIcon,

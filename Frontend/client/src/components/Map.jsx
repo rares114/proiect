@@ -36,6 +36,11 @@ const Map = ({ center, zoom }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {markerPosition && (
+          <Marker position={markerPosition} icon={customIcon}>
+            <Popup>Custom Marker Icon</Popup>
+          </Marker>
+        )}
         <GeocoderControl onAddressSelect={handleAddressSelect} />
       </MapContainer>
     </div>

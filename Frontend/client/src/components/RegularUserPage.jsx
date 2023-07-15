@@ -5,7 +5,7 @@ import { server_url } from "../config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const ProductsTable = () => {
+const RegularUserPage = ({ setSelectedProduct }) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -34,11 +34,12 @@ const ProductsTable = () => {
   };
 
   const handleProductClick = (record) => {
-    navigate("/produsul"); // Navigate to "/produsul" page
+    setSelectedProduct(record);
+    navigate("/produsul");
   };
 
   const handleShopClick = (record) => {
-    navigate("/magazinul"); // Navigate to "/magazinul" page
+    navigate("/magazinul");
   };
 
   const columns = [
@@ -87,7 +88,7 @@ const ProductsTable = () => {
         className="tabelTotal"
         rowClassName="clickable-row"
         onRow={(record) => ({
-          onClick: () => {}, // Empty click handler to prevent selection
+          onClick: () => {},
         })}
       />
       <div className="buttonWrapper">
@@ -99,4 +100,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default RegularUserPage;

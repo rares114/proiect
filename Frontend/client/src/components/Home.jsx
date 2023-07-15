@@ -3,6 +3,7 @@ import myImage from "../images/StoreLOGO.png";
 import myImage2 from "../images/storePNG.png";
 import PrimaryNavbar from "./PrimaryNavbar";
 import Map from "./Map";
+import { Input, Button } from 'antd';
 
 const Home = () => {
   const defaultPosition = [51.505, -0.09];
@@ -24,6 +25,11 @@ const Home = () => {
       <div className="containerHarta">
         <Map center={defaultPosition} zoom={defaultZoom} />
       </div>
+      <Input className="productInput"/>
+      <Button className="nav-btn-home">
+      Caută
+      </Button>
+      <h1 className="h1search">Începe deja să cauți produsele dorite!</h1>
     </div>
   );
 };
