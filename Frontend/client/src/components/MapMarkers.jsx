@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Marker, useMap } from "react-leaflet";
+import { Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
@@ -28,20 +28,27 @@ const MapMarkers = ({ markers }) => {
     let sumX = 0;
     let sumY = 0;
     for (const marker of markers) {
-      sumX += marker.x;
-      sumY += marker.y;
+      sumX += parseFloat(marker.x);
+      sumY += parseFloat(marker.y);
     }
 
     map.panTo([sumY / markers.length, sumX / markers.length]);
   }, [map, markers]);
 
-  useEffect(() => {}, [map]);
+  useEffect(() => {
+    map.locate({ setView: true, maxZoom: 16 });
+  }, [map]);
 
+  useEffect(() => {}, [map]);
   return (
     <div>
       {markers.map((marker) => {
         return (
-          <Marker position={[marker.y, marker.x]} icon={customIcon}></Marker>
+          <Marker position={[marker.y, marker.x]} icon={customIcon}>
+            <Popup>
+              {marker.label}
+            </Popup>
+          </Marker>
         );
       })}
     </div>

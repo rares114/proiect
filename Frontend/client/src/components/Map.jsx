@@ -3,8 +3,6 @@ import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "bootstrap/dist/css/bootstrap.css";
-import GeocoderControl from "./GeocoderControl";
-import markerIcon from "../images/marker.png";
 import MapMarkers from "./MapMarkers";
 
 const Map = ({ center, zoom, markers }) => {
@@ -36,8 +34,6 @@ const Map = ({ center, zoom, markers }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* <GeocoderControl onAddressSelect={handleAddressSelect} /> */}
         <MapMarkers markers={markers}></MapMarkers>
       </MapContainer>
     </div>

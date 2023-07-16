@@ -39,7 +39,8 @@ const RegularUserPage = ({ setSelectedProduct }) => {
   };
 
   const handleShopClick = (record) => {
-    navigate("/magazinul");
+    const shopId = record.shop;
+    navigate(`/magazinul/${shopId}`);
   };
 
   const columns = [
@@ -67,8 +68,8 @@ const RegularUserPage = ({ setSelectedProduct }) => {
     },
     {
       title: "Magazin",
-      dataIndex: "shop",
-      key: "shop",
+      dataIndex: "shop_name",
+      key: "shop_name",
       render: (text, record) => (
         <span
           className="clickable-text"

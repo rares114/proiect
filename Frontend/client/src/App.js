@@ -14,6 +14,7 @@ import Faq from "./components/Faq";
 import DespreNoi from "./components/DespreNoi";
 import Contact from "./components/Contact";
 import Produsul from './components/Produsul';
+import Magazinul from './components/Magazinul';
 
 const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -40,6 +41,8 @@ const App = () => {
             path="/produsul"
             element={<Produsul selectedProduct={selectedProduct} />}
           />
+          
+          <Route path="/magazinul/:shopId" element={<Magazinul/>} />
         </Routes>
       </Router>
     </div>

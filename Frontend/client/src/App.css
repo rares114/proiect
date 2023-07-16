@@ -103,7 +103,7 @@ h2 {
 .register-container {
   text-align: center;
   position: absolute;
-  width: 400px;
+  width: 450px;
   left: 50%;
   top: 45%;
   transform: translate(-50%, -50%);
@@ -230,6 +230,18 @@ h2 {
   left: 15%;
   top: 100px;
   padding: 40px;
+  font-size: 17px;
+}
+
+.shop-details-container {
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  position: relative;
+  padding: 40px;
+  left: 15%;
+  top: 100px;
+  background-color: white;
 }
 
 .logout:hover {

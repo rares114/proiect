@@ -41,8 +41,8 @@ const ProductsTable = () => {
     },
     {
       title: "Magazin",
-      dataIndex: "shop",
-      key: "shop",
+      dataIndex: "shop_name",
+      key: "shop_name",
     },
   ];
 
