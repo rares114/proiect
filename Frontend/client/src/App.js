@@ -41,8 +41,7 @@ const App = () => {
             path="/produsul"
             element={<Produsul selectedProduct={selectedProduct} />}
           />
-          
-          <Route path="/magazinul/:shopId" element={<Magazinul/>} />
+          <Route path="/shop/:shopId/*" element={<Magazinul />} />
         </Routes>
       </Router>
     </div>

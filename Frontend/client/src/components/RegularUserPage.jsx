@@ -1,12 +1,15 @@
-import { Table, Button } from "antd";
+import { Table, Button, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { server_url } from "../config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const { Search } = Input;
+
 const RegularUserPage = ({ setSelectedProduct }) => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +25,7 @@ const RegularUserPage = ({ setSelectedProduct }) => {
       });
       console.log(response.data[0]);
       setData(response.data[0]);
+      setFilteredData(response.data[0]);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -40,7 +44,15 @@ const RegularUserPage = ({ setSelectedProduct }) => {
 
   const handleShopClick = (record) => {
     const shopId = record.shop;
-    navigate(`/magazinul/${shopId}`);
+    navigate(`/shop/${shopId}`);
+  };
+
+  const handleFilterChange = (e) => {
+    const searchKeyword = e.target.value.toLowerCase();
+    const filteredResult = data.filter((item) =>
+      item.name.toLowerCase().includes(searchKeyword)
+    );
+    setFilteredData(filteredResult);
   };
 
   const columns = [
@@ -80,12 +92,18 @@ const RegularUserPage = ({ setSelectedProduct }) => {
       ),
     },
   ];
-
   return (
     <div className="container">
+      <div className="filter-container">
+        <Search
+          placeholder="Cauta produsul dorit"
+          onChange={handleFilterChange}
+          className="searchBarr"
+        />
+      </div>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={filteredData}
         className="tabelTotal"
         rowClassName="clickable-row"
         onRow={(record) => ({

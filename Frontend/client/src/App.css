@@ -234,14 +234,30 @@ h2 {
 }
 
 .shop-details-container {
-  width: 500px;
-  height: 500px;
+  width: 1200px;
+  height: 650px;
   border-radius: 10px;
+  background: white;
+  color: black;
+  font-weight: 600;
   position: relative;
-  padding: 40px;
   left: 15%;
   top: 100px;
-  background-color: white;
+  padding: 40px;
+  font-size: 17px;
+}
+
+.searchBarr {
+  width: 400px;
+  position: relative;
+  top: 40px;
+  left: 130px;
+}
+
+.textul-shop {
+  width: 450px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .logout:hover {

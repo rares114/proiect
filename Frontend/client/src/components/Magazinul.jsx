@@ -23,7 +23,7 @@ const Magazinul = () => {
   const getShopInformation = async (shopId) => {
     try {
       const response = await axios.get(`${server_url}/shops/${shopId}`);
-      return response.data; 
+      return response.data;
     } catch (error) {
       console.error("Error fetching shop information:", error);
       throw error;
@@ -32,10 +32,20 @@ const Magazinul = () => {
 
   return (
     <div className="shop-details-container">
-      <p>Shop Details</p>
-      <p>Shop Name: {shopData.name}</p>
-      <p>Email: {shopData.email}</p>
-      <p>Address: {shopData.address}</p>
+      <div className="textul-shop">
+        <p>Detaliile magazinului</p>
+        <p>Numele magazinului: {shopData.name}</p>
+        <p>Adresa: {shopData.address}</p>
+        <p>
+          Descriere: <br />
+          {shopData.description}
+        </p>
+        <p>
+          Program: <br />
+          {shopData.schedule}
+        </p>
+        <p>Email-ul de contact: {shopData.email}</p>
+      </div>
     </div>
   );
 };

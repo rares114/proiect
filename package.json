@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "geocoder": "^0.2.3",
+    "react-leaflet": "^4.2.1"
+  }
+}

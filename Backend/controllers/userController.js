@@ -127,8 +127,11 @@ const getMe = asyncHandler(async (req, res) => {
 
 const fetchAllProducts = asyncHandler(async (req, res) => {
   try {
-    const query = `SELECT * FROM products`;
-
+    const query = `
+      SELECT p.*, s.name AS shop_name
+      FROM products p
+      INNER JOIN shops s ON p.shop = s.id
+    `;
     const products = await executeQuery(query);
     res.status(200).json(products);
   } catch (error) {

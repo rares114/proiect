@@ -8,6 +8,8 @@ import markerIcon from "../images/marker3.png";
 const MapMarkers = ({ markers }) => {
   const map = useMap();
 
+  console.log(markers);
+
   const customIcon = L.icon({
     iconUrl: markerIcon,
     iconSize: [60, 60],
