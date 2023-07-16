@@ -31,6 +31,8 @@ const Home = () => {
       for (const addr of addresses) {
         const results = await provider.search({ query: addr.address });
         if (results.length > 0) {
+          results[0].name = addr.name;
+          console.log(results[0]);
           geocodeCoords.push(results[0]);
         }
       }
@@ -52,13 +54,11 @@ const Home = () => {
       <div className="divH2">
         <h2>
           Explorează brutăriile și florăriile, magazinele alimentare și
-          non-stop, unde vei găsi produse unice și servicii personalizate.
+          non-stop din apropierea ta, unde vei găsi produsele căutate la prețuri mici.
           Bucură-te de plăcerile simple ale cumpărăturilor și lasă-te inspirat
           de frumusețea și prospețimea oferite de afacerile mici din vecinătatea
           ta. Fă parte dintr-o comunitate vibrantă și susține aceste
-          întreprinderi locale, aducând o notă de magie și culoare în viața ta
-          de zi cu zi. Descoperă aceste comori și lasă-te purtat într-o
-          experiență plină de surprize și inspirație!
+          întreprinderi locale! Folosește-te de tehnologie și economisește timp și bani.
         </h2>
       </div>
       <img src={myImage2} className="grocery" alt="Grocery" />
@@ -73,7 +73,7 @@ const Home = () => {
       <Button className="nav-btn-home" onClick={cautaProdus}>
         Caută
       </Button>
-      <h1 className="h1search">Începe deja să cauți produsele dorite!</h1>
+      <h1 className="h1search">Caută produsele dorite!</h1>
     </div>
   );
 };

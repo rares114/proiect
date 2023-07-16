@@ -35,6 +35,12 @@ h2 {
   left: -5%;
 }
 
+.containerHartaMag {
+  position: relative;
+  top: -160%;
+  left: 15%;
+}
+
 .grocery {
   width: 900px;
   height: 900px;

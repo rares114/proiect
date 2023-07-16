@@ -48,6 +48,8 @@ const MapMarkers = ({ markers }) => {
         return (
           <Marker position={[marker.y, marker.x]} icon={customIcon}>
             <Popup>
+              {marker.name}
+              <br />
               {marker.label}
             </Popup>
           </Marker>
