@@ -34,6 +34,18 @@ const updateShopInfo = asyncHandler(async (req, res) => {
   }
 });
 
+const searchProduct = asyncHandler(async (req, res) => {
+  try {
+    const search = req.params.search;
+    const searchShopByProducts = `SELECT address FROM shops WHERE id IN (SELECT shop FROM products WHERE name LIKE '%${search}%')`;
+    const shops = await executeQuery(searchShopByProducts);
+    res.status(200).json(shops[0]);
+  } catch (error) {
+    console.error("Error registering shop:", error);
+    throw error;
+  }
+});
+
 const addOrUpdateProduct = asyncHandler(async (req, res) => {
   try {
     if (req.user.isshop !== 1) {
@@ -72,4 +84,5 @@ module.exports = {
   updateShopInfo,
   addOrUpdateProduct,
   fetchShopProducts,
+  searchProduct,
 };

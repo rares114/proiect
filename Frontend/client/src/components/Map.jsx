@@ -5,8 +5,9 @@ import "leaflet/dist/leaflet.css";
 import "bootstrap/dist/css/bootstrap.css";
 import GeocoderControl from "./GeocoderControl";
 import markerIcon from "../images/marker.png";
+import MapMarkers from "./MapMarkers";
 
-const Map = ({ center, zoom }) => {
+const Map = ({ center, zoom, markers }) => {
   const [markerPosition, setMarkerPosition] = useState(center);
 
   const containerStyle = {
@@ -18,12 +19,6 @@ const Map = ({ center, zoom }) => {
     margin: "auto",
   };
 
-  const customIcon = L.icon({
-    iconUrl: markerIcon,
-    iconSize: [60, 60],
-    iconAnchor: [60 / 2, 60 / 2],
-  });
-
   const handleAddressSelect = (address) => {
     const { lat, lng } = address;
     setMarkerPosition([lat, lng]);
@@ -31,13 +26,19 @@ const Map = ({ center, zoom }) => {
 
   return (
     <div style={containerStyle}>
-      <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} style={{ width: "100%", height: "100%" }}>
+      <MapContainer
+        center={center}
+        zoom={zoom}
+        scrollWheelZoom={false}
+        style={{ width: "100%", height: "100%" }}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        
-        <GeocoderControl onAddressSelect={handleAddressSelect} />
+
+        {/* <GeocoderControl onAddressSelect={handleAddressSelect} /> */}
+        <MapMarkers markers={markers}></MapMarkers>
       </MapContainer>
     </div>
   );
